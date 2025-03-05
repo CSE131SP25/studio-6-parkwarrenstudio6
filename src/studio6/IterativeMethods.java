@@ -53,4 +53,8 @@ public class IterativeMethods {
 		}
 		return reversed;
 	}
+	
+	public static void main(String[] args) {
+		
+	}
 }

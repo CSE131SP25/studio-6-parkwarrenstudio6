@@ -28,11 +28,31 @@ public class RecursiveMethods {
 	 *                                      depth
 	 * @param radiusMinimumDrawingThreshold radius above which drawing should occur
 	 */
-	public static void circlesUponCircles(double xCenter, double yCenter, double radius, double radiusMinimumDrawingThreshold) {
+	public static void circlesUponCircles(double x, double y, double radius, double threshold) {
+		double bound = 7.0;
+		StdDraw.setXscale(-bound, bound);
+		StdDraw.setYscale(-bound, bound);
+		int r = (Math.random() * 255);
+		int g = (Math.random() * 255);
+		int b = (Math.random() * 255);
 		
-		// FIXME complete the recursive drawing
-	}
+		StdDraw.setPenColor(r, g, b);
+			if (radius <= threshold) {
+		        return; // Base case: stop when the radius is too small
+		    }
 	
+			// Draw the current circle
+		    StdDraw.circle(x, y, radius);
+		    
+		    // Recursive calls for the four directions with a reduced radius
+		    double newRadius = radius / 1.2;
+		    circlesUponCircles(x + radius, y, newRadius, threshold); // Right
+		    circlesUponCircles(x - radius, y, newRadius, threshold); // Left
+		    circlesUponCircles(x, y + radius, newRadius, threshold); // Up
+		    circlesUponCircles(x, y - radius, newRadius, threshold); // Down	
+		    
+		    
+	}
 
 	/**
 	 * This method uses recursion to create a reverse of the given array
@@ -62,5 +82,7 @@ public class RecursiveMethods {
 		
 	}
 
-
+	public static void main(String[] args) {
+		circlesUponCircles(0, 0, 3, .5);
+	}
 }
